@@ -30,7 +30,7 @@ changes.on('ready', function () {
 function update (data, cb) {
   if (data.type !== 'add' || typeof data.key !== 'string') return cb()
 
-  var id = new Buffer(data.key, 'hex')
+  var id = Buffer.from(data.key, 'hex')
   if (argv.bytes) id = id.slice(0, argv.bytes)
   var dir = path.join(folder, id.toString('hex'))
 
