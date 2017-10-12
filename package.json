@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Sync all dats stored by a hypercore-archiver instance as normal Dats",
   "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
   "bin": {
     "dat-archiver-sync": "./bin.js"
   },
@@ -16,7 +19,8 @@
     "stream-each": "^1.2.2"
   },
   "devDependencies": {
-    "hypercore-archiver": "^4.1.3"
+    "hypercore-archiver": "^4.1.3",
+    "standard": "^10.0.3"
   },
   "repository": {
     "type": "git",
