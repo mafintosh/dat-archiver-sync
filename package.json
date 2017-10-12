@@ -1,6 +1,6 @@
 {
   "name": "dat-archiver-sync",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Sync all dats stored by a hypercore-archiver instance as normal Dats",
   "main": "index.js",
   "scripts": {
