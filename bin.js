@@ -24,7 +24,7 @@ var changes = hypercore(ram, key, {valueEncoding: 'json'})
 each(changes.createReadStream({live: true}), update)
 
 changes.on('ready', function () {
-  swarm(changes)
+  swarm(changes, {dht: false})
 })
 
 function update (data, cb) {
