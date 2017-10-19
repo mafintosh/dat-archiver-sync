@@ -20,6 +20,7 @@ if (!key) {
 }
 
 var changes = hypercore(ram, key, {valueEncoding: 'json'})
+var sharing = {}
 
 each(changes.createReadStream({live: true}), update)
 
@@ -29,6 +30,8 @@ changes.on('ready', function () {
 
 function update (data, cb) {
   if (data.type !== 'add' || typeof data.key !== 'string') return cb()
+  if (sharing[data.key]) return
+  sharing[data.key] = true
 
   var id = Buffer.from(data.key, 'hex')
   if (argv.bytes) id = id.slice(0, argv.bytes)
