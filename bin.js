@@ -21,6 +21,7 @@ if (!key) {
 
 var changes = hypercore(ram, key, {valueEncoding: 'json'})
 var sharing = {}
+var ignoring = [].concat(argv.ignore || argv.i || [])
 
 each(changes.createReadStream({live: true}), update)
 
@@ -30,7 +31,8 @@ changes.on('ready', function () {
 
 function update (data, cb) {
   if (data.type !== 'add' || typeof data.key !== 'string') return cb()
-  if (sharing[data.key]) return
+  if (ignoring.indexOf(data.key) > -1) return cb()
+  if (sharing[data.key]) return cb()
   sharing[data.key] = true
 
   var id = Buffer.from(data.key, 'hex')
