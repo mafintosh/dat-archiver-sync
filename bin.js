@@ -24,10 +24,12 @@ var changes = hypercore(ram, key, {valueEncoding: 'json'})
 each(changes.createReadStream({live: true}), update)
 
 changes.on('ready', function () {
-  swarm(changes, {dht: false})
+  swarm(changes, {dht: false, live: true})
 })
 
 function update (data, cb) {
+  console.log(data)
+  return cb()
   if (data.type !== 'add' || typeof data.key !== 'string') return cb()
 
   var id = Buffer.from(data.key, 'hex')
@@ -40,7 +42,7 @@ function update (data, cb) {
 
   drive.on('ready', function () {
     console.log('Syncing ' + drive.key.toString('hex') + ' to ' + dir)
-    swarm(drive)
+    swarm(drive, {live: true})
   })
 
   cb(null)
