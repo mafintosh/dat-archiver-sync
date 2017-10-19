@@ -28,8 +28,6 @@ changes.on('ready', function () {
 })
 
 function update (data, cb) {
-  console.log(data)
-  return cb()
   if (data.type !== 'add' || typeof data.key !== 'string') return cb()
 
   var id = Buffer.from(data.key, 'hex')
